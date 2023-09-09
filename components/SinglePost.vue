@@ -5,7 +5,7 @@
     </NuxtLink>
     <div class="container text-center">
       <img :src="props?.data?.image" />
-      <p>{{ dateOfCreation.toLocaleString() }}</p>
+      <p>{{ formattedDate }}</p>
       <h1 class="my-8">{{ props?.data?.title }}</h1>
       <p>{{ props?.data?.content }}</p>
     </div>
@@ -18,5 +18,31 @@
 <script setup>
 const props = defineProps(["data"]);
 
-const dateOfCreation = new Date(props?.data?.createdAt);
+const dateOfCreation = ref(null);
+const formattedDate = ref(null);
+
+watch(
+  () => props?.data?.createdAt,
+  (newVal) => {
+    if (isValidDate(newVal)) {
+      dateOfCreation.value = new Date(newVal);
+      formattedDate.value = formatDate(dateOfCreation.value);
+    } else {
+      dateOfCreation.value = null;
+      formattedDate.value = "Invalid Date";
+    }
+  }
+);
+
+function isValidDate(dateString) {
+  const date = new Date(dateString);
+  return !isNaN(date) && dateString.trim() !== "";
+}
+
+function formatDate(date) {
+  if (!date) {
+    return "No good date";
+  }
+  return date.toLocaleDateString();
+}
 </script>

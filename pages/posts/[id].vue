@@ -23,6 +23,6 @@ const fetchPost = async (id) => {
 };
 
 onMounted(() => {
-  fetchPost(params.id);
+  fetchPost(params?.id);
 });
 </script>

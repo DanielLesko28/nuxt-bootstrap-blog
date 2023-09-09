@@ -15,7 +15,7 @@
             {{ props.data.comment }}
           </p>
           <p class="card-text">
-            <small class="text-muted">Last updated 3 mins ago</small>
+            <small class="text-muted">{{ formattedDate }}</small>
           </p>
         </div>
       </div>
@@ -25,4 +25,32 @@
 
 <script setup>
 const props = defineProps(["data"]);
+
+const dateOfCreation = ref(null);
+const formattedDate = ref(null);
+
+watch(
+  () => props?.data?.createdAt,
+  (newVal) => {
+    if (isValidDate(newVal)) {
+      dateOfCreation.value = new Date(newVal);
+      formattedDate.value = formatDate(dateOfCreation.value);
+    } else {
+      dateOfCreation.value = null;
+      formattedDate.value = "Invalid Date";
+    }
+  }
+);
+
+function isValidDate(dateString) {
+  const date = new Date(dateString);
+  return !isNaN(date) && dateString.trim() !== "";
+}
+
+function formatDate(date) {
+  if (!date) {
+    return "No good date";
+  }
+  return date.toLocaleDateString();
+}
 </script>
