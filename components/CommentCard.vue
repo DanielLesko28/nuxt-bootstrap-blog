@@ -26,31 +26,7 @@
 <script setup>
 const props = defineProps(["data"]);
 
-const dateOfCreation = ref(null);
-const formattedDate = ref(null);
+const createdAtDate = new Date(props.data.createdAt);
 
-watch(
-  () => props?.data?.createdAt,
-  (newVal) => {
-    if (isValidDate(newVal)) {
-      dateOfCreation.value = new Date(newVal);
-      formattedDate.value = formatDate(dateOfCreation.value);
-    } else {
-      dateOfCreation.value = null;
-      formattedDate.value = "Invalid Date";
-    }
-  }
-);
-
-function isValidDate(dateString) {
-  const date = new Date(dateString);
-  return !isNaN(date) && dateString.trim() !== "";
-}
-
-function formatDate(date) {
-  if (!date) {
-    return "No good date";
-  }
-  return date.toLocaleDateString();
-}
+const formattedDate = createdAtDate.toLocaleString();
 </script>
