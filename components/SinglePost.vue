@@ -19,7 +19,4 @@
 const props = defineProps(["data"]);
 
 const dateOfCreation = new Date(props?.data?.createdAt);
-
-console.log("props", props.data);
-console.log("dateOfCreation", dateOfCreation);
 </script>
