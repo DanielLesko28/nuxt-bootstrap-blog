@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-6">
+  <div class="mt-6 mx-4">
     <h1>Comments</h1>
     <div class="row">
       <div v-for="comment in comments" :key="comment.id" class="col-md-6">
