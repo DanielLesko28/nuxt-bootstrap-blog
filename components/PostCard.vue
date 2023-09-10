@@ -1,6 +1,6 @@
 <template>
   <div class="card mb-4">
-    <img :src="props.data.image" class="card-img-top" alt="..." />
+    <img :src="props.data.image" class="card-img-to p-1" alt="..." />
     <div class="card-body">
       <h5 class="card-title">{{ props.data.title }}</h5>
       <p class="card-text">

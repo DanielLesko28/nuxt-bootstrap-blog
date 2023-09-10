@@ -5,7 +5,7 @@
         <div class="btn btn-primary mx-2">Back</div>
       </NuxtLink>
       <div class="container text-center">
-        <img :src="props?.data?.image" />
+        <img :src="props?.data?.image" class="img-fluid" />
         <p>{{ formattedDate }}</p>
         <h1 class="my-8">{{ props?.data?.title }}</h1>
         <p>{{ props?.data?.content }}</p>
